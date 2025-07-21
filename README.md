@@ -1,6 +1,6 @@
 # 🗂️ DBExporter
 
-**DBTableExporter** is a user-friendly GUI-based tool that allows anyone — even non-technical users — to export tables from **PostgreSQL** or **MySQL** databases into a well-formatted **Excel file**. With built-in filtering options and data sanitization, it ensures a smooth, clean export every time.
+**DBExporter** is a user-friendly GUI-based tool that allows anyone — even non-technical users — to export tables from **PostgreSQL** or **MySQL** databases into a well-formatted **Excel file**. With built-in filtering options and data sanitization, it ensures a smooth, clean export every time.
 
 ---
 
