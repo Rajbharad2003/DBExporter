@@ -23,11 +23,11 @@ def export_to_excel(config):
         cursor = conn.cursor()
         tables = get_tables(conn, config["db_type"])
 
-        if config["table_limit"] > 0:
-            tables = tables[:config["table_limit"]]
+        # if config["table_limit"] > 0:
+        #     tables = tables[:config["table_limit"]]
 
-        if config["show_tables"]:
-            print("📋 Tables:", tables)
+        # if config["show_tables"]:
+        #     print("📋 Tables:", tables)
 
         wb = Workbook()
         ws = wb.active

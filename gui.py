@@ -15,10 +15,10 @@ def run_app():
     ttk.Label(app, text="Database to Excel Exporter", font=("Arial", 16, "bold")).pack(pady=10)
 
     # === DB Type Radio Buttons ===
-    frame_db = ttk.LabelFrame(app, text="Select Database")
-    frame_db.pack(pady=10, fill="x", padx=10)
-    ttk.Radiobutton(frame_db, text="PostgreSQL", variable=db_type, value="PostgreSQL").pack(side="left", padx=10)
-    ttk.Radiobutton(frame_db, text="MySQL", variable=db_type, value="MySQL").pack(side="left", padx=10)
+    # frame_db = ttk.LabelFrame(app, text="")
+    # frame_db.pack(pady=10, fill="x", padx=10)
+    # ttk.Radiobutton(frame_db, text="PostgreSQL", variable=db_type, value="PostgreSQL").pack(side="left", padx=10)
+    # ttk.Radiobutton(frame_db, text="MySQL", variable=db_type, value="MySQL").pack(side="left", padx=10)
 
     # === Connection Fields ===
     conn_entries = {}
@@ -38,16 +38,16 @@ def run_app():
     frame_filter.pack(pady=10, fill="x", padx=10)
 
     row_limit = tk.IntVar(value=1000)
-    table_limit = tk.IntVar(value=0)
-    show_tables = tk.BooleanVar(value=False)
+    # table_limit = tk.IntVar(value=0)
+    # show_tables = tk.BooleanVar(value=False)
 
     ttk.Label(frame_filter, text="Rows per Table:").pack(anchor="w", padx=10)
     ttk.Entry(frame_filter, textvariable=row_limit).pack(fill="x", padx=10)
 
-    ttk.Label(frame_filter, text="Number of Tables (0 for all):").pack(anchor="w", padx=10, pady=(10, 0))
-    ttk.Entry(frame_filter, textvariable=table_limit).pack(fill="x", padx=10)
+    # ttk.Label(frame_filter, text="Number of Tables (0 for all):").pack(anchor="w", padx=10, pady=(10, 0))
+    # ttk.Entry(frame_filter, textvariable=table_limit).pack(fill="x", padx=10)
 
-    ttk.Checkbutton(frame_filter, text="Show Table List", variable=show_tables).pack(anchor="w", padx=10, pady=5)
+    # ttk.Checkbutton(frame_filter, text="Show Table List", variable=show_tables).pack(anchor="w", padx=10, pady=5)
 
     # === Loading Popup ===
     def show_loading_popup():
@@ -79,8 +79,8 @@ def run_app():
             "user": conn_entries["username"].get(),
             "password": conn_entries["password"].get(),
             "row_limit": row_limit.get(),
-            "table_limit": table_limit.get(),
-            "show_tables": show_tables.get()
+            # "table_limit": table_limit.get(),
+            # "show_tables": show_tables.get()
         }
 
         loading_win = show_loading_popup()
