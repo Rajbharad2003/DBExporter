@@ -24,7 +24,7 @@
 ## ✨ Run The Product
 
 ```bash
-**Just Double click on** dist/main.exe
+**Just Double click on** dist/DbExporter.exe
 ```
 
 ## 📁 Project Structure

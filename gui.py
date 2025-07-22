@@ -2,6 +2,7 @@ import tkinter as tk
 from tkinter import ttk, messagebox
 from data_exporter import export_to_excel
 from db_connector import test_connection
+import threading
 
 def run_app():
     app = tk.Tk()
@@ -48,7 +49,27 @@ def run_app():
 
     ttk.Checkbutton(frame_filter, text="Show Table List", variable=show_tables).pack(anchor="w", padx=10, pady=5)
 
-    # === Buttons ===
+    # === Loading Popup ===
+    def show_loading_popup():
+        loading = tk.Toplevel(app)
+        loading.title("Processing...")
+        loading.geometry("300x140")
+        loading.resizable(False, False)
+        loading.configure(bg="#f4f4f4")
+        loading.grab_set()  # Modal behavior
+
+        tk.Label(loading, text="Please wait while exporting...", font=("Segoe UI", 12, "bold"), bg="#f4f4f4").pack(pady=(20, 10))
+
+        progress = ttk.Progressbar(loading, mode="indeterminate", length=200)
+        progress.pack(pady=5)
+        progress.start(10)  # 10ms interval (adjust for speed)
+
+        tk.Label(loading, text="🧠 Crunching data for you...", font=("Segoe UI", 10), fg="#666", bg="#f4f4f4").pack(pady=(10, 5))
+
+        return loading
+
+
+    # === Export Function (with threading) ===
     def on_export():
         config = {
             "db_type": db_type.get(),
@@ -62,12 +83,20 @@ def run_app():
             "show_tables": show_tables.get()
         }
 
-        success, message = export_to_excel(config)
-        if success:
-            messagebox.showinfo("Success", message)
-        else:
-            messagebox.showerror("Error", message)
+        loading_win = show_loading_popup()
 
+        def export_task():
+            success, message = export_to_excel(config)
+            loading_win.destroy()  # Close the loading popup
+
+            if success:
+                messagebox.showinfo("Success", message)
+            else:
+                messagebox.showerror("Error", message)
+
+        threading.Thread(target=export_task).start()
+
+    # === Test Connection ===
     def on_test():
         config = {
             "db_type": db_type.get(),
@@ -83,9 +112,14 @@ def run_app():
         else:
             messagebox.showerror("Connection Failed", msg)
 
+    # === Buttons ===
     btn_frame = ttk.Frame(app)
     btn_frame.pack(pady=20)
     ttk.Button(btn_frame, text="Test Connection", command=on_test).pack(side="left", padx=10)
     ttk.Button(btn_frame, text="Export to Excel", command=on_export).pack(side="left", padx=10)
 
     app.mainloop()
+
+# Run the app
+if __name__ == "__main__":
+    run_app()
