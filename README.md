@@ -21,6 +21,12 @@
 
 ---
 
+## ✨ Run The Product
+
+```bash
+**Just Double click on** dist/main.exe
+```
+
 ## 📁 Project Structure
 
 ```bash
